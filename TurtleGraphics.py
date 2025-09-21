@@ -39,56 +39,71 @@ function drawPolygon(sides, radius, color, cx, cy){
 }
 #===========================================
 #random corner
-var MAX_SIZE = 120;
-var MAX_SHAPES = 100;
-var counter = 0;
+import turtle
 
-function start(){
-    setTimer(draw, 50);
-}
+def drawSquare(myTurtle, size):
+    for i in range(4):
+        myTurtle.forward(size)
+        myTurtle.right(90)
 
-function draw(){
-    drawSquareWithCornerFill(Randomizer.nextInt(40, MAX_SIZE),
-                             Randomizer.nextColor(),
-                             Randomizer.nextInt(0, getWidth()),
-                             Randomizer.nextInt(0, getHeight()),
-                             Randomizer.nextInt(1, 4)); 
-    
-    counter++;
-    if(counter == MAX_SHAPES){
-        stopTimer(draw);
-    }
-}
+def fillCorner(myTurtle, corner):
+    size = 200
+    myTurtle.penup()
+    myTurtle.goto(-size/2, size/2)  
+    myTurtle.pendown()
+    drawSquare(myTurtle, size)
 
-function drawSquareWithCornerFill(size, color, cx, cy, corner){
-    var rect = new Rectangle(size, size);
-    rect.setColor(color);
-    rect.setPosition(cx - size/2, cy - size/2);
-    add(rect);
 
-    var tri = new Polygon();
-    if(corner === 1){ 
-        tri.addPoint(cx - size/2, cy - size/2);
-        tri.addPoint(cx, cy - size/2);
-        tri.addPoint(cx - size/2, cy);
-    } else if(corner === 2){ 
-        tri.addPoint(cx, cy - size/2);
-        tri.addPoint(cx + size/2, cy - size/2);
-        tri.addPoint(cx + size/2, cy);
-    } else if(corner === 3){ 
-        tri.addPoint(cx - size/2, cy);
-        tri.addPoint(cx, cy);
-        tri.addPoint(cx - size/2, cy + size/2);
-    } else { 
-        tri.addPoint(cx, cy);
-        tri.addPoint(cx + size/2, cy);
-        tri.addPoint(cx + size/2, cy + size/2);
-    }
-    tri.setColor(Color.black); 
-    add(tri);
-}
+    myTurtle.penup()
+    if corner == 1:      
+        myTurtle.goto(-size/2, 0)
+    elif corner == 2:    
+        myTurtle.goto(0, 0)
+    elif corner == 3:    
+        myTurtle.goto(-size/2, -size/2)
+    elif corner == 4:  
+        myTurtle.goto(0, -size/2)
+    myTurtle.pendown()
+
+
+    myTurtle.begin_fill()
+    drawSquare(myTurtle, size/2)
+    myTurtle.end_fill()
+
+def main():
+    myTurtle = turtle.Turtle()
+    myTurtle.speed(3)
+    fillCorner(myTurtle, 2) 
+    turtle.done()
+
+if __name__ == "__main__":
+    main()
 
 #======================================================
 #random square in squares
+import turtle
+
+def drawSquare(myTurtle, size):
+    for i in range(4):
+        myTurtle.forward(size)
+        myTurtle.right(90)
+
+def squaresInSquares(myTurtle, num):
+    size = 50
+    for i in range(num):
+        myTurtle.penup()
+        myTurtle.goto(-size/2, size/2)  
+        myTurtle.pendown()
+        drawSquare(myTurtle, size)
+        size += 50   
+
+def main():
+    myTurtle = turtle.Turtle()
+    myTurtle.speed(3)
+    squaresInSquares(myTurtle, 5)
+    turtle.done()
+
+if __name__ == "__main__":
+    main()
 
 
