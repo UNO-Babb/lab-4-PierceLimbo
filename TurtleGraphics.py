@@ -1,7 +1,7 @@
 #TurtleGraphics.py
 #Name: Pierce Limbo
 #Date: 9/22/2025
-#Assignment: Lab3 
+#Assignment: Lab 4 
 
 #=======================
 #Random Polygons
