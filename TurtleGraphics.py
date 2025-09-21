@@ -5,38 +5,28 @@
 
 #=======================
 #Random Polygons
-var MAX_SIZE = 80;
-var MAX_SHAPES = 100;
-var counter = 0;
+import turtle
+import random
 
-function start(){
-    setTimer(draw, 50);
-}
+def drawPolygon(myTurtle, sides, size=100):
+    angle = 360 / sides
+    for i in range(sides):
+        myTurtle.forward(size)
+        myTurtle.right(angle)
 
-function draw(){
-    drawPolygon(Randomizer.nextInt(3, 8),     // random sides (triangle–octagon)
-                Randomizer.nextInt(20, MAX_SIZE), 
-                Randomizer.nextColor(),
-                Randomizer.nextInt(0, getWidth()),
-                Randomizer.nextInt(0, getHeight()));
-    
-    counter++;
-    if(counter == MAX_SHAPES){
-        stopTimer(draw);
-    }
-}
+def main():
+    myTurtle = turtle.Turtle()
+    myTurtle.speed(3)
 
-function drawPolygon(sides, radius, color, cx, cy){
-    var poly = new Polygon();
-    for(var i = 0; i < sides; i++){
-        var ang = i * (2 * Math.PI / sides);
-        var x = cx + radius * Math.cos(ang);
-        var y = cy + radius * Math.sin(ang);
-        poly.addPoint(x, y);
-    }
-    poly.setColor(color);
-    add(poly);
-}
+
+    sides = random.randint(3, 10)
+    drawPolygon(myTurtle, sides, 70)
+
+    turtle.done()
+
+if __name__ == "__main__":
+    main()
+
 #===========================================
 #random corner
 import turtle
